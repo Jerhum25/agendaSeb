@@ -231,7 +231,7 @@ export default function ClientDetail() {
 
       <style>{`
         .main-content {
-          margin-left: 256px;
+          margin-left: 0;
         }
         .detail-grid {
           display: grid;
@@ -301,7 +301,7 @@ function RdvRow({ rdv, isPast, isLast, onEdit, onDelete }) {
           <div>
             <p style={{ fontWeight: 600, color: '#1a1a1a', margin: 0 }}>{rdv.prestation}</p>
             <p style={{ fontSize: '13px', color: '#2c2c2c80', margin: '3px 0 0' }}>
-              {rdv.heure}{rdv.duree ? ` · ${rdv.duree} min` : ''}
+              {rdv.heure}{rdv.duree ? ` · ${rdv.duree} h` : ''}
             </p>
             {rdv.notes && <p style={{ fontSize: '12px', color: '#2c2c2c60', fontStyle: 'italic', margin: '6px 0 0', lineHeight: 1.5 }}>{rdv.notes}</p>}
           </div>

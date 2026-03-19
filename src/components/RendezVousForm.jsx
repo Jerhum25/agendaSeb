@@ -5,7 +5,7 @@ import FormField, { Input, Select, Textarea } from './FormField';
 import { addRendezVous, updateRendezVous } from '../lib/firestore';
 import { format } from 'date-fns';
 
-const EMPTY = { clientId: '', date: '', heure: '', duree: 60, prestation: '', montant: '', statut: 'confirmé', notes: '' };
+const EMPTY = { clientId: '', date: '', heure: '', duree: 1, prestation: '', montant: '', statut: 'confirmé', notes: '' };
 
 export default function RendezVousForm({ isOpen, onClose, rdv, clients, defaultClientId, onSuccess }) {
   const [form, setForm] = useState(EMPTY);
@@ -22,7 +22,7 @@ export default function RendezVousForm({ isOpen, onClose, rdv, clients, defaultC
     setLoading(true);
     try {
       const client = clients.find((c) => c.id === form.clientId);
-      const payload = { ...form, clientNom: client ? `${client.prenom} ${client.nom}` : '', montant: parseFloat(form.montant) || 0, duree: parseInt(form.duree) || 60 };
+      const payload = { ...form, clientNom: client ? `${client.prenom} ${client.nom}` : '', montant: parseFloat(form.montant) || 0, duree: parseInt(form.duree) || 1 };
       rdv?.id ? await updateRendezVous(rdv.id, payload) : await addRendezVous(payload);
       onSuccess?.();
       onClose();
@@ -47,7 +47,7 @@ export default function RendezVousForm({ isOpen, onClose, rdv, clients, defaultC
         </div>
         <FormField label="Durée">
           <Select value={form.duree} onChange={set('duree')}>
-            {[15, 30, 45, 60, 75, 90, 120].map((d) => <option key={d} value={d}>{d} min</option>)}
+            {[1,2,3,4,5,6,7,8,9,10,11,12].map((d) => <option key={d} value={d}>{d} h</option>)}
           </Select>
         </FormField>
         <FormField label="Prestation *">
